@@ -2,9 +2,7 @@ package com.wrapper.deezer.requests;
 
 import com.wrapper.deezer.Values;
 import com.wrapper.deezer.requests.authorization.server_side.RequestBehavior;
-import com.wrapper.deezer.requests.data.AbstractDataRequest;
 import io.restassured.common.mapper.TypeRef;
-import io.restassured.http.Headers;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.HttpEntity;
@@ -17,9 +15,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 
 public abstract class AbstractRequest<T> implements RequestBehavior<T> {
 
@@ -73,7 +71,6 @@ public abstract class AbstractRequest<T> implements RequestBehavior<T> {
 
     public static abstract class Builder<T, BT extends Builder<T, ?>> implements RequestBehavior.Builder<T, BT>{
 
-        ////TODO : when adding a BasicNameValuePair, add it iff the name doesn't already exists
         private List<NameValuePair> queryParameters = new ArrayList<>();
         private List<Header> headers = new ArrayList<>();
         private List<NameValuePair> bodyParameters = new ArrayList<>();
@@ -114,7 +111,13 @@ public abstract class AbstractRequest<T> implements RequestBehavior<T> {
         public <ST> BT setQueryParameter(String name, ST value) {
             assert(name != null && value != null);
             assert(!name.isEmpty());
-            this.queryParameters.add(new BasicNameValuePair(name, String.valueOf(value)));
+
+            MyNameValuePair pair = new MyNameValuePair(name, value.toString());
+            //Because pairs are compared by their names: if the param already exists, it is replaced. If not, it is added
+            queryParameters.remove(pair);
+            queryParameters.add(pair);
+
+
             return self();
         }
 
@@ -143,7 +146,13 @@ public abstract class AbstractRequest<T> implements RequestBehavior<T> {
         public <ST> BT setBodyParameter(String name, ST value) {
             assert(name != null && value != null);
             assert(!name.isEmpty());
-            this.bodyParameters.add(new BasicNameValuePair(name, String.valueOf(value)));
+
+            MyNameValuePair pair = new MyNameValuePair(name, value.toString());
+            //Because pairs are compared by their names: if the param already exists, it is replaced. If not, it is added
+            bodyParameters.remove(pair);
+            bodyParameters.add(pair);
+
+
             return self();
         }
 
