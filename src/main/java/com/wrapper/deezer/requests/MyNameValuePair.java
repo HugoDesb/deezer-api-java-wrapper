@@ -20,12 +20,12 @@ public class MyNameValuePair implements NameValuePair, Serializable {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String getValue() {
-        return null;
+        return value;
     }
 
     @Override

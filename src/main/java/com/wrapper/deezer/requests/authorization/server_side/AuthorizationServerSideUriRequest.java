@@ -3,16 +3,9 @@ package com.wrapper.deezer.requests.authorization.server_side;
 
 import com.wrapper.deezer.enums.Permissions;
 import com.wrapper.deezer.exceptions.DeezerException;
-import com.wrapper.deezer.requests.AbstractRequest;
-import org.apache.hc.core5.http.ContentType;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.NameValuePair;
-import org.apache.hc.core5.http.message.BasicNameValuePair;
-import org.apache.hc.core5.net.URIBuilder;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;

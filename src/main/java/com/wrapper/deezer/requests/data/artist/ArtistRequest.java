@@ -2,8 +2,8 @@ package com.wrapper.deezer.requests.data.artist;
 
 import com.wrapper.deezer.exceptions.DeezerException;
 import com.wrapper.deezer.models.data.artist.Artist;
-import com.wrapper.deezer.requests.authorization.server_side.RequestBehavior;
 import com.wrapper.deezer.requests.data.AbstractDataRequest;
+import com.wrapper.deezer.requests.data.artist.methods.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -38,44 +38,34 @@ public class ArtistRequest extends AbstractDataRequest<Artist> {
             return new ArtistAlbumsRequest.Builder(this);
         }
 
-        /*
         public ArtistCommentsRequest.Builder comments(){
-
+            return new ArtistCommentsRequest.Builder(this);
         }
 
         public ArtistFansRequest.Builder fans(){
-
+            return new ArtistFansRequest.Builder(this);
         }
 
         public ArtistRelatedRequest.Builder related(){
-
+            return new ArtistRelatedRequest.Builder(this);
         }
 
         public ArtistRadioRequest.Builder radio(){
-
+            return new ArtistRadioRequest.Builder(this);
         }
 
         public ArtistPlaylistsRequest.Builder playlists(){
-
-        }
-
-        artist / albums 	Return a list of artist's albums. Represented by an array of Album objects 	A list of object of type album
-        artist / comments 	Return a list of artist's comments. Represented by an array of Comment objects 	A list of object of type comment
-        artist / fans 	Return a list of artist's fans. Represented by an array of User objects 	A list of object of type user
-        artist / related 	Return a list of related artists. Represented by an array of Artist objects 	A list of object of type artist
-        artist / radio 	Return a list of tracks. Represented by an array of Track object 	A list of object of type track
-        artist / playlists 	Return a list of artist's playlists. Represented by an array of Playlist object 	A list of object of type playlist
-
-
-         */
-        @Override
-        protected Builder self() {
-            return this;
+            return new ArtistPlaylistsRequest.Builder(this);
         }
 
         @Override
         public ArtistRequest build() {
             return new ArtistRequest(this);
+        }
+
+        @Override
+        protected Builder self() {
+            return this;
         }
     }
 }

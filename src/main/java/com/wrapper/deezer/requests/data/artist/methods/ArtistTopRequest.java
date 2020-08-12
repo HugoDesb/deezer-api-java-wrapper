@@ -1,11 +1,9 @@
-package com.wrapper.deezer.requests.data.artist;
+package com.wrapper.deezer.requests.data.artist.methods;
 
 import com.wrapper.deezer.exceptions.DeezerException;
 import com.wrapper.deezer.models.Page;
-import com.wrapper.deezer.models.data.album.Album4;
 import com.wrapper.deezer.models.data.track.TrackTop;
 import com.wrapper.deezer.requests.AbstractRequest;
-import com.wrapper.deezer.requests.authorization.server_side.RequestBehavior;
 import com.wrapper.deezer.requests.data.AbstractDataRequest;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
 import io.restassured.common.mapper.TypeRef;
@@ -15,27 +13,24 @@ import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 
-public class ArtistAlbumsRequest extends AbstractDataRequest<Page<Album4>> {
+public class ArtistTopRequest extends AbstractDataRequest<Page<TrackTop>> {
 
-    public ArtistAlbumsRequest(Builder builder) {
+    private ArtistTopRequest(final Builder builder) {
         super(builder);
     }
 
     @Override
-    public Page<Album4> execute() throws IOException, DeezerException, ParseException {
+    public Page<TrackTop> execute() throws IOException, DeezerException, ParseException {
         return given()
                 .get(getURI())
-                .as(new TypeRef<Page<Album4>>() {});
+                .as(new TypeRef<Page<TrackTop>>() {});
     }
 
-    public static final class Builder extends AbstractPaginatedDataRequest.Builder<Album4, ArtistAlbumsRequest.Builder>{
-
-        public Builder() {
-        }
+    public static final class Builder extends AbstractPaginatedDataRequest.Builder<TrackTop, Builder>{
 
         public Builder(AbstractRequest.Builder builder) {
             super(builder);
-            addSegmentToPath("albums");
+            addSegmentToPath("top");
         }
 
         @Override
@@ -44,8 +39,8 @@ public class ArtistAlbumsRequest extends AbstractDataRequest<Page<Album4>> {
         }
 
         @Override
-        public ArtistAlbumsRequest build() {
-            return new ArtistAlbumsRequest(this);
+        public ArtistTopRequest build() {
+            return new ArtistTopRequest(this);
         }
     }
 }
