@@ -2,6 +2,7 @@ package com.wrapper.deezer;
 
 import com.wrapper.deezer.requests.authorization.server_side.AuthorisationServerSideTokenRequest;
 import com.wrapper.deezer.requests.authorization.server_side.AuthorizationServerSideUriRequest;
+import com.wrapper.deezer.requests.data.album.AlbumRequest;
 import com.wrapper.deezer.requests.data.artist.ArtistRequest;
 
 import java.net.URI;
@@ -25,6 +26,10 @@ public class DeezerApi {
 
     public ArtistRequest.Builder getArtist(String artistId){
         return new ArtistRequest.Builder(artistId);
+    }
+
+    public AlbumRequest.Builder getAlbum(String albumId){
+        return new AlbumRequest.Builder(albumId);
     }
 
     public AuthorizationServerSideUriRequest.Builder getAuthorizationServerSideUri(String app_id, URI redirectURI){

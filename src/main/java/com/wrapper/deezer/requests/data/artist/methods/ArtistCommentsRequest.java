@@ -2,7 +2,7 @@ package com.wrapper.deezer.requests.data.artist.methods;
 
 import com.wrapper.deezer.exceptions.DeezerException;
 import com.wrapper.deezer.models.Page;
-import com.wrapper.deezer.models.data.comments.Comment;
+import com.wrapper.deezer.models.data.comments.Comment2;
 import com.wrapper.deezer.requests.AbstractRequest;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
 import io.restassured.common.mapper.TypeRef;
@@ -12,7 +12,7 @@ import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 
-public class ArtistCommentsRequest extends AbstractPaginatedDataRequest<Page<Comment>> {
+public class ArtistCommentsRequest extends AbstractPaginatedDataRequest<Comment2> {
 
 
     public ArtistCommentsRequest(Builder builder) {
@@ -20,13 +20,11 @@ public class ArtistCommentsRequest extends AbstractPaginatedDataRequest<Page<Com
     }
 
     @Override
-    public Page<Comment> execute() throws IOException, DeezerException, ParseException {
-        return given()
-                .get(getURI())
-                .as(new TypeRef<Page<Comment>>() {});
+    public Page<Comment2> execute() throws IOException, DeezerException, ParseException {
+        return get().as(new TypeRef<Page<Comment2>>() {});
     }
 
-    public static final class Builder extends AbstractPaginatedDataRequest.Builder<Comment, ArtistCommentsRequest.Builder>{
+    public static final class Builder extends AbstractPaginatedDataRequest.Builder<Comment2, ArtistCommentsRequest.Builder>{
 
         public Builder() {
         }

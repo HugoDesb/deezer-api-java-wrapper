@@ -1,8 +1,10 @@
 package com.wrapper.deezer.requests;
 
 import com.wrapper.deezer.Values;
-import com.wrapper.deezer.requests.authorization.server_side.RequestBehavior;
+import com.wrapper.deezer.exceptions.DeezerException;
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.internal.http.ContentEncoding;
+import io.restassured.response.Response;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.HttpEntity;
@@ -10,16 +12,21 @@ import org.apache.hc.core5.http.NameValuePair;
 import org.apache.hc.core5.http.message.BasicHeader;
 import org.apache.hc.core5.net.URIBuilder;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
 public abstract class AbstractRequest<T> implements RequestBehavior<T> {
 
-    private final List<NameValuePair> bodyParameters;
+    private final Map<String, String> bodyParameters;
     private URI uri;
     private ContentType contentType = null;
     private HttpEntity body = null;
@@ -59,11 +66,33 @@ public abstract class AbstractRequest<T> implements RequestBehavior<T> {
         return uri;
     }
 
-    public T get(){
+    public Response get(){
         return given()
-                .body(bodyParameters.stream())
                 .contentType(String.valueOf(contentType))
-                .get(uri).as(new TypeRef<T>() {});
+                .get(uri);
+    }
+
+    public Response post(){
+        return given()
+                .contentType(String.valueOf(contentType))
+                .body(bodyParameters)
+                .post(uri);
+
+    }
+
+    public Response create(){
+        return given()
+                .contentType(String.valueOf(contentType))
+                .body(bodyParameters)
+                .request("CREATE", uri);
+
+    }
+
+    public Response delete(){
+        return given()
+                .contentType(String.valueOf(contentType))
+                .body(bodyParameters)
+                .delete(uri);
 
     }
 
@@ -71,7 +100,7 @@ public abstract class AbstractRequest<T> implements RequestBehavior<T> {
 
         private List<NameValuePair> queryParameters = new ArrayList<>();
         private List<Header> headers = new ArrayList<>();
-        private List<NameValuePair> bodyParameters = new ArrayList<>();
+        private Map<String, String> bodyParameters = new HashMap<>();
         //private IHttpManager httpManager = SpotifyApi.DEFAULT_HTTP_MANAGER;
         private String host;
         private List<String> path = new ArrayList<>();
@@ -144,13 +173,7 @@ public abstract class AbstractRequest<T> implements RequestBehavior<T> {
         public <ST> BT setBodyParameter(String name, ST value) {
             assert(name != null && value != null);
             assert(!name.isEmpty());
-
-            MyNameValuePair pair = new MyNameValuePair(name, value.toString());
-            //Because pairs are compared by their names: if the param already exists, it is replaced. If not, it is added
-            bodyParameters.remove(pair);
-            bodyParameters.add(pair);
-
-
+            bodyParameters.put(name, value.toString());
             return self();
         }
 

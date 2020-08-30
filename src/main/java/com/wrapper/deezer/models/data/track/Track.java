@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wrapper.deezer.enums.ExplicitContent;
 import com.wrapper.deezer.models.data.Contributor;
 import com.wrapper.deezer.models.data.album.Album2;
+import com.wrapper.deezer.models.data.artist.Artist11;
 import com.wrapper.deezer.models.data.artist.Artist2;
 
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,79 +16,52 @@ import java.util.List;
 public class Track {
     @JsonProperty("id")
     private Long id;
-
     @JsonProperty("readable")
     private boolean readable;
-
     @JsonProperty("title")
     private String title;
-
     @JsonProperty("title_short")
     private String titleShort;
-
     @JsonProperty("title_version")
     private String titleVersion;
-
-    @JsonProperty("unseen")
-    private boolean unseen;
-
     @JsonProperty("isrc")
     private String isrc;
-
     @JsonProperty("link")
     private URL link;
-
     @JsonProperty("share")
     private URL share;
-
     @JsonProperty("duration")
     private int duration;
-
     @JsonProperty("track_position")
     private int trackPosition;
-
     @JsonProperty("disk_number")
     private int diskNumber;
-
     @JsonProperty("rank")
     private int rank;
-
     @JsonProperty("release_date")
     private Date releaseDate;
-
     @JsonProperty("explicit_lyrics")
     private boolean explicitLyrics;
-
     @JsonProperty("explicit_content_lyrics")
     private ExplicitContent explicitContentLyrics;
-
     @JsonProperty("explicit_content_cover")
     private ExplicitContent explicitContentCover;
-
     @JsonProperty("preview")
     private URL preview;
-
     @JsonProperty("bpm")
     private float bpm;
-
     @JsonProperty("gain")
     private float gain;
-
-    @JsonProperty("countries")
-    private List<String> countries;
-
+    @JsonProperty("available_countries")
+    private List<String> availableCountries;
     @JsonProperty("alternative")
     private Track alternative;
-
     @JsonProperty("contributors")
     private List<Contributor> contributors;
-
     @JsonProperty("artist")
-    private Artist2 artist;
-
+    private Artist11 artist;
     @JsonProperty("album")
     private Album2 album;
-
     @JsonProperty("type")
     private String type;
 
@@ -130,14 +103,6 @@ public class Track {
 
     public void setTitleVersion(String titleVersion) {
         this.titleVersion = titleVersion;
-    }
-
-    public boolean isUnseen() {
-        return unseen;
-    }
-
-    public void setUnseen(boolean unseen) {
-        this.unseen = unseen;
     }
 
     public String getIsrc() {
@@ -252,12 +217,12 @@ public class Track {
         this.gain = gain;
     }
 
-    public List<String> getCountries() {
-        return countries;
+    public List<String> getAvailableCountries() {
+        return availableCountries;
     }
 
-    public void setCountries(List<String> countries) {
-        this.countries = countries;
+    public void setAvailableCountries(List<String> availableCountries) {
+        this.availableCountries = availableCountries;
     }
 
     public Track getAlternative() {
@@ -276,11 +241,11 @@ public class Track {
         this.contributors = contributors;
     }
 
-    public Artist2 getArtist() {
+    public Artist11 getArtist() {
         return artist;
     }
 
-    public void setArtist(Artist2 artist) {
+    public void setArtist(Artist11 artist) {
         this.artist = artist;
     }
 
@@ -308,7 +273,6 @@ public class Track {
                 ", title='" + title + '\'' +
                 ", titleShort='" + titleShort + '\'' +
                 ", titleVersion='" + titleVersion + '\'' +
-                ", unseen=" + unseen +
                 ", isrc='" + isrc + '\'' +
                 ", link=" + link +
                 ", share=" + share +
@@ -323,7 +287,7 @@ public class Track {
                 ", preview=" + preview +
                 ", bpm=" + bpm +
                 ", gain=" + gain +
-                ", countries=" + countries +
+                ", availableCountries=" + availableCountries +
                 ", alternative=" + alternative +
                 ", contributors=" + contributors +
                 ", artist=" + artist +

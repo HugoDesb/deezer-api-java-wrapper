@@ -36,13 +36,10 @@ public class TrackRadio {
     private ExplicitContent explicitContentCover;
     @JsonProperty("preview")
     private URL preview;
-
     @JsonProperty("artist")
     private Artist5 artist;
-
     @JsonProperty("album")
     private Album3 album;
-
     @JsonProperty("type")
     private String type;
 

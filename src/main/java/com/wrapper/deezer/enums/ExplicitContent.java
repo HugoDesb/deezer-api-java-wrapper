@@ -9,7 +9,9 @@ public enum ExplicitContent {
     EXPLICIT(1),
     UNKOWN(2),
     EDITED(3),
-    NO_ADVICE_AVAILABLE(6);
+    PARTIALLY_EXPLICIT(4),
+    NO_ADVICE_AVAILABLE(6),
+    PARTIALLY_NO_ADVICE_AVAILABLE(7);
 
     private int value ;
 

@@ -8,40 +8,28 @@ public class Artist4 {
 
     @JsonProperty("id")
     private Long id;
-
     @JsonProperty("name")
     private String name;
-
     @JsonProperty("link")
     private URL link;
-
     @JsonProperty("picture")
     private URL picture;
-
     @JsonProperty("picture_small")
     private URL pictureSmall;
-
     @JsonProperty("picture_medium")
     private URL pictureMedium;
-
     @JsonProperty("picture_big")
     private URL pictureBig;
-
     @JsonProperty("picture_xl")
     private URL pictureXl;
-
     @JsonProperty("nb_album")
     private int nbAlbum;
-
     @JsonProperty("nb_fan")
     private int nbFan;
-
     @JsonProperty("radio")
     private boolean radio;
-
     @JsonProperty("tracklist")
     private URL tracklist;
-
     @JsonProperty("type")
     private String type;
 

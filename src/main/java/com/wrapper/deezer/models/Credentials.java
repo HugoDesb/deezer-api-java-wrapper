@@ -11,4 +11,12 @@ public class Credentials {
         this.accessToken = accessToken;
         this.expires = expires;
     }
+
+    @Override
+    public String toString() {
+        return "Credentials{" +
+                "accessToken='" + accessToken + '\'' +
+                ", expires=" + expires +
+                '}';
+    }
 }

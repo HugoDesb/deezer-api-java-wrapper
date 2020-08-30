@@ -3,6 +3,8 @@ package com.wrapper.deezer.requests.authorization.server_side;
 
 import com.wrapper.deezer.enums.Permissions;
 import com.wrapper.deezer.exceptions.DeezerException;
+import com.wrapper.deezer.requests.authorization.AbstractAuthorizationRequest;
+import com.wrapper.deezer.requests.data.chart.ChartRequest;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,10 +12,8 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public final class AuthorizationServerSideUriRequest extends AbstractAuthorizationRequest<URI>{
+public final class AuthorizationServerSideUriRequest extends AbstractAuthorizationRequest<URI> {
 
-
-    private final String BASE_URL = "https://connect.deezer.com/oauth/auth.php";
 
     public AuthorizationServerSideUriRequest(Builder builder) {
         super(builder);

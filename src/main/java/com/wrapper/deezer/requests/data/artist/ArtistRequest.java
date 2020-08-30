@@ -3,6 +3,7 @@ package com.wrapper.deezer.requests.data.artist;
 import com.wrapper.deezer.exceptions.DeezerException;
 import com.wrapper.deezer.models.data.artist.Artist;
 import com.wrapper.deezer.requests.data.AbstractDataRequest;
+import com.wrapper.deezer.requests.data.chart.ChartRequest;
 import com.wrapper.deezer.requests.data.artist.methods.*;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class ArtistRequest extends AbstractDataRequest<Artist> {
 
     @Override
     public Artist execute() throws IOException, DeezerException, ParseException {
-        return null;
+        return get().as(Artist.class);
     }
 
     public static final class Builder extends AbstractDataRequest.Builder<Artist, ArtistRequest.Builder>{

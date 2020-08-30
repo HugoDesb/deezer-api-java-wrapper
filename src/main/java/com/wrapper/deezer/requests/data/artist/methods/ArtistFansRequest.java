@@ -5,6 +5,7 @@ import com.wrapper.deezer.models.Page;
 import com.wrapper.deezer.models.data.user.User2;
 import com.wrapper.deezer.requests.AbstractRequest;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
+import com.wrapper.deezer.requests.data.chart.ChartRequest;
 import io.restassured.common.mapper.TypeRef;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 
-public class ArtistFansRequest extends AbstractPaginatedDataRequest<Page<User2>> {
+public class ArtistFansRequest extends AbstractPaginatedDataRequest<User2> {
 
     public ArtistFansRequest(Builder builder) {
         super(builder);
@@ -20,9 +21,7 @@ public class ArtistFansRequest extends AbstractPaginatedDataRequest<Page<User2>>
 
     @Override
     public Page<User2> execute() throws IOException, DeezerException, ParseException {
-        return given()
-                .get(getURI())
-                .as(new TypeRef<Page<User2>>() {});
+        return get().as(new TypeRef<Page<User2>>() {});
     }
 
 

@@ -1,12 +1,7 @@
 package com.wrapper.deezer.requests.data;
 
 import com.wrapper.deezer.Values;
-import com.wrapper.deezer.exceptions.DeezerException;
 import com.wrapper.deezer.requests.AbstractRequest;
-import com.wrapper.deezer.requests.authorization.server_side.AbstractAuthorizationRequest;
-
-import java.io.IOException;
-import java.text.ParseException;
 
 public abstract class AbstractDataRequest<T> extends AbstractRequest<T> {
 
@@ -18,6 +13,11 @@ public abstract class AbstractDataRequest<T> extends AbstractRequest<T> {
         protected Builder() {
             super();
             setHost(Values.DATA_HOST);
+        }
+
+        public BT setAccessToken(String accessToken){
+            setQueryParameter("access_token", accessToken);
+            return self();
         }
 
         protected Builder(AbstractRequest.Builder builder) {

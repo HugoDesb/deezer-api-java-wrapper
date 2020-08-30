@@ -1,6 +1,7 @@
-package com.wrapper.deezer;
+package com.wrapper.deezer.authorization;
 
 
+import com.wrapper.deezer.MyTest;
 import com.wrapper.deezer.enums.Permissions;
 import com.wrapper.deezer.exceptions.DeezerException;
 import com.wrapper.deezer.requests.authorization.server_side.AuthorizationServerSideUriRequest;

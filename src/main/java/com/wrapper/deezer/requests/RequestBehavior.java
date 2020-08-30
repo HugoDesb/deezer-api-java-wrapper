@@ -1,4 +1,4 @@
-package com.wrapper.deezer.requests.authorization.server_side;
+package com.wrapper.deezer.requests;
 
 import com.wrapper.deezer.exceptions.DeezerException;
 import org.apache.hc.core5.http.ContentType;

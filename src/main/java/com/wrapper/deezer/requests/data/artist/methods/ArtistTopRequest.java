@@ -6,6 +6,7 @@ import com.wrapper.deezer.models.data.track.TrackTop;
 import com.wrapper.deezer.requests.AbstractRequest;
 import com.wrapper.deezer.requests.data.AbstractDataRequest;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
+import com.wrapper.deezer.requests.data.chart.ChartRequest;
 import io.restassured.common.mapper.TypeRef;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 
-public class ArtistTopRequest extends AbstractDataRequest<Page<TrackTop>> {
+public class ArtistTopRequest extends AbstractPaginatedDataRequest<TrackTop> {
 
     private ArtistTopRequest(final Builder builder) {
         super(builder);
@@ -21,9 +22,7 @@ public class ArtistTopRequest extends AbstractDataRequest<Page<TrackTop>> {
 
     @Override
     public Page<TrackTop> execute() throws IOException, DeezerException, ParseException {
-        return given()
-                .get(getURI())
-                .as(new TypeRef<Page<TrackTop>>() {});
+        return get().as(new TypeRef<Page<TrackTop>>() {});
     }
 
     public static final class Builder extends AbstractPaginatedDataRequest.Builder<TrackTop, Builder>{

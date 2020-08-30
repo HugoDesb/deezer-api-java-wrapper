@@ -4,13 +4,15 @@ import com.wrapper.deezer.enums.Output;
 import com.wrapper.deezer.exceptions.DeezerException;
 import com.wrapper.deezer.models.Credentials;
 import com.wrapper.deezer.requests.AbstractRequest;
+import com.wrapper.deezer.requests.authorization.AbstractAuthorizationRequest;
+import com.wrapper.deezer.requests.data.chart.ChartRequest;
 
 import java.io.IOException;
 import java.text.ParseException;
 
 import static io.restassured.RestAssured.given;
 
-public class AuthorisationServerSideTokenRequest extends AbstractAuthorizationRequest<Credentials>{
+public class AuthorisationServerSideTokenRequest extends AbstractAuthorizationRequest<Credentials> {
 
     public AuthorisationServerSideTokenRequest(AbstractRequest.Builder<Credentials, ?> builder) {
         super(builder);
@@ -18,7 +20,7 @@ public class AuthorisationServerSideTokenRequest extends AbstractAuthorizationRe
 
     @Override
     public Credentials execute() throws IOException, DeezerException, ParseException {
-        return given().get(getURI()).as(Credentials.class);
+        return get().as(Credentials.class);
     }
 
     public static final class Builder extends AbstractAuthorizationRequest.Builder<Credentials, AuthorisationServerSideTokenRequest.Builder>{
@@ -42,7 +44,7 @@ public class AuthorisationServerSideTokenRequest extends AbstractAuthorizationRe
         }
 
         @Override
-        public RequestBehavior<Credentials> build() {
+        public AuthorisationServerSideTokenRequest build() {
             return new AuthorisationServerSideTokenRequest(this);
         }
     }

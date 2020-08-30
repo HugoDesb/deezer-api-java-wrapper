@@ -1,4 +1,4 @@
-package com.wrapper.deezer.requests.authorization.server_side;
+package com.wrapper.deezer.requests.authorization;
 
 import com.wrapper.deezer.Values;
 import com.wrapper.deezer.requests.AbstractRequest;
