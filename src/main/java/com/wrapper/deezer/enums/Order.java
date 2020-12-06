@@ -13,7 +13,7 @@ public enum Order {
     DURATION_ASC("DURATION_ASC"),
     DURATION_DESC("DURATION_DESC");
 
-    private String value;
+    private final String value;
 
     Order(String value) {
         this.value = value;

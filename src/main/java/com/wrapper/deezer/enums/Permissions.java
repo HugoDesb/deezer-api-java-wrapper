@@ -33,9 +33,9 @@ public enum Permissions {
     /**
      * Allow the application to access the user's listening history
      */
-    LISTENNING_HISTORY("listening_history");
+    LISTENING_HISTORY("listening_history");
 
-    private String value;
+    private final String value;
 
     Permissions(String value) {
         this.value = value;

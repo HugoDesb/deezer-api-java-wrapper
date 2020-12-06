@@ -1,19 +1,19 @@
 package com.wrapper.deezer.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 
 public enum ExplicitContent {
 
-    NOT_EXPLICIT(0),
-    EXPLICIT(1),
-    UNKOWN(2),
-    EDITED(3),
-    PARTIALLY_EXPLICIT(4),
-    NO_ADVICE_AVAILABLE(6),
-    PARTIALLY_NO_ADVICE_AVAILABLE(7);
+    @SerializedName("0") NOT_EXPLICIT(0),
+    @SerializedName("1") EXPLICIT(1),
+    @SerializedName("2") UNKNOWN(2),
+    @SerializedName("3") EDITED(3),
+    @SerializedName("4") PARTIALLY_EXPLICIT(4),
+    @SerializedName("6") NO_ADVICE_AVAILABLE(6),
+    @SerializedName("7") PARTIALLY_NO_ADVICE_AVAILABLE(7);
 
-    private int value ;
+    private final int value;
 
     ExplicitContent(int value) {
         this.value = value;
@@ -21,16 +21,6 @@ public enum ExplicitContent {
 
     public int getValue() {
         return value;
-    }
-
-    @JsonCreator
-    public static ExplicitContent getNameByValue(final int value) {
-        for (final ExplicitContent s: ExplicitContent.values()) {
-            if (s.getValue() == value) {
-                return s;
-            }
-        }
-        return null;
     }
 }
 
