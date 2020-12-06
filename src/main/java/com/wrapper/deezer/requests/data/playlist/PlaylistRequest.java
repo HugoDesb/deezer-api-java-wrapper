@@ -1,6 +1,6 @@
 package com.wrapper.deezer.requests.data.playlist;
 
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.data.playlist.Playlist;
 import com.wrapper.deezer.requests.data.AbstractDataRequest;
 import com.wrapper.deezer.requests.data.playlist.actions.PlaylistActions;
@@ -8,46 +8,77 @@ import com.wrapper.deezer.requests.data.playlist.methods.PlaylistCommentsRequest
 import com.wrapper.deezer.requests.data.playlist.methods.PlaylistFansRequest;
 import com.wrapper.deezer.requests.data.playlist.methods.PlaylistRadioRequest;
 import com.wrapper.deezer.requests.data.playlist.methods.PlaylistTracksRequest;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class PlaylistRequest extends AbstractDataRequest<Playlist> {
     public PlaylistRequest(Builder builder) {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Playlist execute() throws IOException, DeezerException, ParseException {
-        return get().as(Playlist.class);
+    public Playlist execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(Playlist.class);
     }
 
-    public static class Builder extends AbstractDataRequest.Builder<Playlist, PlaylistRequest.Builder>{
+    public static class Builder extends AbstractDataRequest.Builder<Playlist, PlaylistRequest.Builder> {
 
         public Builder(Long id) {
+            super();
             assert id != null;
 
             addSegmentToPath("playlist");
             addSegmentToPath(Long.toString(id));
         }
 
-        public PlaylistCommentsRequest.Builder comments(){
+        /**
+         * Return a list of playlist's comments.
+         * @return The request builder up to that point
+         */
+        public PlaylistCommentsRequest.Builder comments() {
             return new PlaylistCommentsRequest.Builder(this);
         }
 
-        public PlaylistFansRequest.Builder fans(){
+        /**
+         * Return a list of playlist's fans
+         * @return The request builder up to that point
+         */
+        public PlaylistFansRequest.Builder fans() {
             return new PlaylistFansRequest.Builder(this);
         }
 
-        public PlaylistTracksRequest.Builder tracks(){
+        /**
+         * Return a list of playlist's tracks
+         * @return The request builder up to that point
+         */
+        public PlaylistTracksRequest.Builder tracks() {
             return new PlaylistTracksRequest.Builder(this);
         }
 
-        public PlaylistRadioRequest.Builder radio(){
+        /**
+         * Return a list of playlist's recommendation tracks
+         * @return The request builder up to that point
+         */
+        public PlaylistRadioRequest.Builder radio() {
             return new PlaylistRadioRequest.Builder(this);
         }
 
-        public PlaylistActions actions(String accessToken){
+        /**
+         * Access the possible actions
+         *
+         * @param accessToken a valid access token
+         * @return an actions gateway
+         */
+        public PlaylistActions actions(String accessToken) {
             return new PlaylistActions(self(), accessToken);
         }
 
@@ -56,6 +87,11 @@ public class PlaylistRequest extends AbstractDataRequest<Playlist> {
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public PlaylistRequest build() {
             return new PlaylistRequest(this);

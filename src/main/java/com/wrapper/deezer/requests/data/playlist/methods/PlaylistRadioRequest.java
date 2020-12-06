@@ -1,32 +1,35 @@
 package com.wrapper.deezer.requests.data.playlist.methods;
 
 
-import com.wrapper.deezer.exceptions.DeezerException;
-import com.wrapper.deezer.models.Page;
-import com.wrapper.deezer.models.data.track.Track10;
-import com.wrapper.deezer.requests.AbstractRequest;
-import com.wrapper.deezer.requests.RequestBehavior;
-import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
+import com.wrapper.deezer.exceptions.DeezerApiException;
+import com.wrapper.deezer.requests.data.AbstractDataRequest;
 import com.wrapper.deezer.requests.data.playlist.PlaylistRequest;
-import io.restassured.common.mapper.TypeRef;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 //TODO : sometimes sends false when no radio is available -- handle THAT !!
-public class PlaylistRadioRequest extends AbstractPaginatedDataRequest<Track10> {
+public class PlaylistRadioRequest extends AbstractDataRequest<Boolean> {
 
 
     public PlaylistRadioRequest(Builder builder) {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Page<Track10> execute() throws IOException, DeezerException, ParseException {
-        return get().as(new TypeRef<Page<Track10>>() {});
+    public Boolean execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(Boolean.class);
     }
 
-    public static class Builder extends AbstractPaginatedDataRequest.Builder<Track10, PlaylistRadioRequest.Builder>{
+    public static class Builder extends AbstractDataRequest.Builder<Boolean, PlaylistRadioRequest.Builder> {
 
         public Builder(PlaylistRequest.Builder builder) {
             super(builder);
@@ -38,6 +41,11 @@ public class PlaylistRadioRequest extends AbstractPaginatedDataRequest<Track10> 
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public PlaylistRadioRequest build() {
             return new PlaylistRadioRequest(this);

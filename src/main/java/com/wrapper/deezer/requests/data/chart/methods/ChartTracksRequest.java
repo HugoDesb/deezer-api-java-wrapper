@@ -1,18 +1,14 @@
 package com.wrapper.deezer.requests.data.chart.methods;
 
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.google.gson.reflect.TypeToken;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.Page;
-import com.wrapper.deezer.models.data.track.Track3;
 import com.wrapper.deezer.models.data.track.Track5;
-import com.wrapper.deezer.requests.AbstractRequest;
-import com.wrapper.deezer.requests.RequestBehavior;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
-import com.wrapper.deezer.requests.data.album.methods.AlbumTracksRequest;
 import com.wrapper.deezer.requests.data.chart.ChartRequest;
-import io.restassured.common.mapper.TypeRef;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class ChartTracksRequest extends AbstractPaginatedDataRequest<Track5> {
 
@@ -20,9 +16,18 @@ public class ChartTracksRequest extends AbstractPaginatedDataRequest<Track5> {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Page<Track5> execute() throws IOException, DeezerException, ParseException {
-        return get().as(new TypeRef<Page<Track5>>() {});
+    public Page<Track5> execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(new TypeToken<Page<Track5>>() {
+        }.getType());
     }
 
     public static class Builder extends AbstractPaginatedDataRequest.Builder<Track5, ChartTracksRequest.Builder> {
@@ -37,6 +42,11 @@ public class ChartTracksRequest extends AbstractPaginatedDataRequest<Track5> {
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public ChartTracksRequest build() {
             return new ChartTracksRequest(this);

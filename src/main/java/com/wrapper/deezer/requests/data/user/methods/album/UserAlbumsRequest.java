@@ -1,18 +1,15 @@
 package com.wrapper.deezer.requests.data.user.methods.album;
 
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.google.gson.reflect.TypeToken;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.Page;
 import com.wrapper.deezer.models.data.album.Album9;
-import com.wrapper.deezer.models.data.user.User;
-import com.wrapper.deezer.requests.AbstractRequest;
-import com.wrapper.deezer.requests.RequestBehavior;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
 import com.wrapper.deezer.requests.data.user.UserRequest;
 import com.wrapper.deezer.requests.data.user.methods.album.actions.UserAlbumActions;
-import io.restassured.common.mapper.TypeRef;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class UserAlbumsRequest extends AbstractPaginatedDataRequest<Album9> {
 
@@ -21,20 +18,35 @@ public class UserAlbumsRequest extends AbstractPaginatedDataRequest<Album9> {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Page<Album9> execute() throws IOException, DeezerException, ParseException {
-        return get().as(new TypeRef<Page<Album9>>() {});
+    public Page<Album9> execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(new TypeToken<Page<Album9>>() {
+        }.getType());
     }
 
-    public static class Builder extends AbstractPaginatedDataRequest.Builder<Album9, UserAlbumsRequest.Builder>{
+    public static class Builder extends AbstractPaginatedDataRequest.Builder<Album9, UserAlbumsRequest.Builder> {
 
         public Builder(UserRequest.Builder builder) {
             super(builder);
             addSegmentToPath("albums");
         }
 
-        public UserAlbumActions actions(String access_token){
-            return new UserAlbumActions(this, access_token);
+        /**
+         * Access the possible actions
+         *
+         * @param accessToken a valid access token
+         * @return an actions gateway
+         */
+        public UserAlbumActions actions(String accessToken) {
+            return new UserAlbumActions(this, accessToken);
         }
 
         @Override
@@ -42,6 +54,11 @@ public class UserAlbumsRequest extends AbstractPaginatedDataRequest<Album9> {
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public UserAlbumsRequest build() {
             return new UserAlbumsRequest(this);

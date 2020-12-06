@@ -1,15 +1,14 @@
 package com.wrapper.deezer.requests.data.chart;
 
-import com.sun.istack.NotNull;
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.google.gson.reflect.TypeToken;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.Page;
 import com.wrapper.deezer.models.data.chart.Chart;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
 import com.wrapper.deezer.requests.data.chart.methods.*;
-import io.restassured.common.mapper.TypeRef;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class ChartRequest extends AbstractPaginatedDataRequest<Chart> {
 
@@ -17,46 +16,70 @@ public class ChartRequest extends AbstractPaginatedDataRequest<Chart> {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Page<Chart> execute() throws IOException, DeezerException, ParseException {
-        return get().as(new TypeRef<Page<Chart>>() {});
+    public Page<Chart> execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(new TypeToken<Page<Chart>>() {
+        }.getType());
     }
 
-    public static class Builder extends AbstractPaginatedDataRequest.Builder<Chart, ChartRequest.Builder>{
-
-        private Long genreId = null;
+    public static class Builder extends AbstractPaginatedDataRequest.Builder<Chart, ChartRequest.Builder> {
 
         public Builder() {
             super();
             addSegmentToPath("chart");
         }
 
-        public Builder setGenre(Long genreId){
-            assert genreId >=0;
-            if(this.genreId == null){
-                this.genreId = genreId;
-                addSegmentToPath(Long.toString(genreId));
-            }
-            return self();
+        public Builder(Long id) {
+            super();
+            addSegmentToPath("chart");
+            addSegmentToPath(Long.toString(id));
         }
 
-        public ChartTracksRequest.Builder tracks(){
+        /**
+         * Returns the Top tracks.
+         * @return The request builder up to that point
+         */
+        public ChartTracksRequest.Builder tracks() {
             return new ChartTracksRequest.Builder(this);
         }
 
-        public ChartAlbumsRequest.Builder albums(){
+        /**
+         * Returns the Top albums.
+         * @return The request builder up to that point
+         */
+        public ChartAlbumsRequest.Builder albums() {
             return new ChartAlbumsRequest.Builder(this);
         }
 
-        public ChartArtistsRequest.Builder artists(){
+        /**
+         * Returns the Top artists.
+         * @return The request builder up to that point
+         */
+        public ChartArtistsRequest.Builder artists() {
             return new ChartArtistsRequest.Builder(this);
         }
 
-        public ChartPlaylistsRequest.Builder playlists(){
+        /**
+         * Returns the Top playlists.
+         * @return The request builder up to that point
+         */
+        public ChartPlaylistsRequest.Builder playlists() {
             return new ChartPlaylistsRequest.Builder(this);
         }
 
-        public ChartPodcastsRequest.Builder podcasts(){
+        /**
+         * Returns the Top podcasts.
+         * @return The request builder up to that point
+         */
+        public ChartPodcastsRequest.Builder podcasts() {
             return new ChartPodcastsRequest.Builder(this);
         }
 
@@ -65,6 +88,11 @@ public class ChartRequest extends AbstractPaginatedDataRequest<Chart> {
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public ChartRequest build() {
             return new ChartRequest(this);

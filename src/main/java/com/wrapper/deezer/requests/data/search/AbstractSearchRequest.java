@@ -1,99 +1,54 @@
 package com.wrapper.deezer.requests.data.search;
 
 import com.wrapper.deezer.enums.Order;
-import com.wrapper.deezer.requests.AbstractRequest;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
 
 public abstract class AbstractSearchRequest<T> extends AbstractPaginatedDataRequest<T> {
-    public AbstractSearchRequest(Builder builder) {
+
+    public AbstractSearchRequest(Builder<T, ?> builder) {
         super(builder);
-
-
-
     }
 
-    public static abstract class Builder<T, BT extends Builder<T, ?>> extends AbstractPaginatedDataRequest.Builder<T, BT>{
+    public static abstract class Builder<T, BT extends Builder<T, ?>> extends AbstractPaginatedDataRequest.Builder<T, BT> {
 
-        private String query;
-        private StringBuilder advancedQuery;
-
-        protected Builder() {
+        protected Builder(String query) {
             super();
-            advancedQuery = new StringBuilder();
+            setQueryParameter("q", query);
         }
 
-        protected Builder(AbstractRequest.Builder builder){
+        protected Builder(SearchRequest.Builder builder) {
             super(builder);
-            advancedQuery = new StringBuilder();
         }
 
-        public BT query(String query){
-            this.query = query;
+        protected Builder(SearchRequest.Builder builder, String query) {
+            super(builder);
+            setQueryParameter("q", query);
+        }
+
+        /**
+         * Set strict parameter
+         * Disable the fuzzy mode (?strict=on)
+         * @param on if on
+         * @return The request builder up to that point
+         */
+        public BT strict(boolean on) {
+            if (on) {
+                setQueryParameter("strict", "on");
+            } else {
+                setQueryParameter("strict", "off");
+            }
             return self();
         }
 
-        public BT strict(){
-            setQueryParameter("strict", "on");
-            return self();
-        }
-
-        public BT order(Order order){
+        /**
+         * Set order
+         * Possible values : RANKING, TRACK_ASC, TRACK_DESC, ARTIST_ASC, ARTIST_DESC, ALBUM_ASC, ALBUM_DESC, RATING_ASC, RATING_DESC, DURATION_ASC, DURATION_DESC
+         * @param order the order
+         * @return The request builder up to that point
+         */
+        public BT order(Order order) {
             setQueryParameter("order", order.getValue());
             return self();
-        }
-
-        public BT forArtist(String artist){
-            addToAdvancedQuery("artist", artist);
-            return self();
-        }
-
-        public BT forAlbum(String album){
-            addToAdvancedQuery("album", album);
-            return self();
-        }
-
-        public BT forTrack(String track){
-            addToAdvancedQuery("track", track);
-            return self();
-        }
-
-        public BT forLabel(String label){
-            addToAdvancedQuery("label", label);
-            return self();
-        }
-
-        public BT forDurationMinimum(int durMin){
-            addToAdvancedQuery("dur_min", Integer.toString(durMin));
-            return self();
-        }
-
-        public BT forDurationMaximum(int durMax){
-            addToAdvancedQuery("dur_max", Integer.toString(durMax));
-            return self();
-        }
-
-        public BT forBpmMin(int bpmMin){
-            addToAdvancedQuery("bpm_min", Integer.toString(bpmMin));
-            return self();
-        }
-
-        public BT forBpmMax(int bpmMax){
-            addToAdvancedQuery("bpm_max", Integer.toString(bpmMax));
-            return self();
-        }
-
-        private void addToAdvancedQuery(String type, String value){
-            assert value != null;
-            assert !value.isEmpty();
-            advancedQuery.append("\""+type+":"+value+"\" ");
-        }
-
-        protected void buildQuery(){
-            assert query != null || advancedQuery.length()!=0;
-            if(query != null){
-                advancedQuery.insert(0, query+" ");
-            }
-            setQueryParameter("q", advancedQuery.toString());
         }
     }
 }

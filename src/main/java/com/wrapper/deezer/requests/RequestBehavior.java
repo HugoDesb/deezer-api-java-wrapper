@@ -1,35 +1,18 @@
 package com.wrapper.deezer.requests;
 
-import com.wrapper.deezer.exceptions.DeezerException;
-import org.apache.hc.core5.http.ContentType;
-import org.apache.hc.core5.http.HttpEntity;
+import com.wrapper.deezer.exceptions.DeezerApiException;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.ParseException;
 
 public interface RequestBehavior<T> {
 
-    URI getURI() throws URISyntaxException;
+    URI getURI();
 
-    T execute() throws IOException, DeezerException, ParseException;
+    T execute() throws IOException, DeezerApiException, ParseException;
 
-    interface Builder<T, BT extends Builder<T, ?>>{
-
-        BT setHost(final String host);
-
-        BT addSegmentToPath(final String path);
-
-        <ST> BT setQueryParameter(final String name, final ST value);
-
-        <ST> BT setHeader(final String name, final ST value);
-
-        BT setContentType(final ContentType contentType);
-
-        BT setBody(final HttpEntity httpEntity);
-
-        <ST> BT setBodyParameter(final String name, final ST value);
+    interface Builder<T, BT extends Builder<T, ?>> {
 
         RequestBehavior<T> build();
     }

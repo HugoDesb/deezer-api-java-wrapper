@@ -1,16 +1,15 @@
 package com.wrapper.deezer.requests.data.album.methods;
 
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.google.gson.reflect.TypeToken;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.Page;
 import com.wrapper.deezer.models.data.comments.Comment2;
 import com.wrapper.deezer.requests.AbstractRequest;
 import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
-import io.restassured.common.mapper.TypeRef;
+import com.wrapper.deezer.requests.data.album.actions.AlbumCommentAction;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
-
-import static io.restassured.RestAssured.given;
 
 public class AlbumCommentsRequest extends AbstractPaginatedDataRequest<Comment2> {
 
@@ -18,16 +17,35 @@ public class AlbumCommentsRequest extends AbstractPaginatedDataRequest<Comment2>
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Page<Comment2> execute() throws IOException, DeezerException, ParseException {
-        return this.get().as(new TypeRef<Page<Comment2>>() {});
+    public Page<Comment2> execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(new TypeToken<Page<Comment2>>() {
+        }.getType());
     }
 
-    public static class Builder extends AbstractPaginatedDataRequest.Builder<Comment2, AlbumCommentsRequest.Builder>{
+    public static class Builder extends AbstractPaginatedDataRequest.Builder<Comment2, AlbumCommentsRequest.Builder> {
 
         public Builder(AbstractRequest.Builder builder) {
             super(builder);
             addSegmentToPath("comments");
+        }
+
+        /**
+         * Access the possible actions
+         *
+         * @param accessToken a valid access token
+         * @return an actions gateway
+         */
+        public AlbumCommentAction actions(String accessToken) {
+            return new AlbumCommentAction(this, accessToken);
         }
 
         @Override
@@ -35,6 +53,11 @@ public class AlbumCommentsRequest extends AbstractPaginatedDataRequest<Comment2>
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public AlbumCommentsRequest build() {
             return new AlbumCommentsRequest(this);

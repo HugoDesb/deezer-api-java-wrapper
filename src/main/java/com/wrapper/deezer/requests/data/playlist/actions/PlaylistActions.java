@@ -1,6 +1,8 @@
 package com.wrapper.deezer.requests.data.playlist.actions;
 
-import com.wrapper.deezer.requests.data.AbstractAction;
+import com.wrapper.deezer.requests.actions.ActionRequestBoolean;
+import com.wrapper.deezer.requests.RequestMethod;
+import com.wrapper.deezer.requests.actions.AbstractAction;
 import com.wrapper.deezer.requests.data.playlist.PlaylistRequest;
 
 public class PlaylistActions extends AbstractAction<PlaylistRequest.Builder> {
@@ -8,16 +10,40 @@ public class PlaylistActions extends AbstractAction<PlaylistRequest.Builder> {
         super(builder, accessToken);
     }
 
-    public PLaylistSeenRequest.Builder seen(){
-        return new PLaylistSeenRequest.Builder(this.builder);
+    /**
+     * Marks the playlist as seen
+     * @return The request builder up to that point
+     */
+    public ActionRequestBoolean.Builder seen() {
+        ActionRequestBoolean.Builder builder = new ActionRequestBoolean.Builder(this.builder, RequestMethod.POST);
+        builder.addSegmentToPath("seen");
+        return builder;
     }
-    public PlaylistRateRequest.Builder rate(int note){
-        return new PlaylistRateRequest.Builder(this.builder, note);
+
+    /**
+     * Rate the playlist
+     * @param note a note in [1, 5]
+     * @return The request builder up to that point
+     */
+    public ActionRequestBoolean.Builder rate(int note) {
+        ActionRequestBoolean.Builder builder = new ActionRequestBoolean.Builder(this.builder, RequestMethod.POST);
+        builder.setBodyParameter("note", Integer.toString(note));
+        return builder;
     }
-    public PlaylistUpdateRequest.Builder update(){
+
+    /**
+     * Update the playlist
+     * @return The request builder up to that point
+     */
+    public PlaylistUpdateRequest.Builder update() {
         return new PlaylistUpdateRequest.Builder(this.builder);
     }
-    public PlaylistDeleteRequest.Builder delete(){
-        return new PlaylistDeleteRequest.Builder(this.builder);
+
+    /**
+     * Deletes the playlist
+     * @return The request builder up to that point
+     */
+    public ActionRequestBoolean.Builder delete() {
+        return new ActionRequestBoolean.Builder(this.builder, RequestMethod.DELETE);
     }
 }

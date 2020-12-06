@@ -1,94 +1,109 @@
 package com.wrapper.deezer.requests.data.search;
 
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.google.gson.reflect.TypeToken;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.Page;
 import com.wrapper.deezer.models.data.track.Track12;
-import com.wrapper.deezer.requests.RequestBehavior;
-import com.wrapper.deezer.requests.data.AbstractPaginatedDataRequest;
 import com.wrapper.deezer.requests.data.search.methods.*;
-import io.restassured.common.mapper.TypeRef;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class SearchRequest extends AbstractSearchRequest<Track12> {
     public SearchRequest(Builder builder) {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Page<Track12> execute() throws IOException, DeezerException, ParseException {
-        return get().as(new TypeRef<Page<Track12>>() {});
+    public Page<Track12> execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(new TypeToken<Page<Track12>>() {
+        }.getType());
     }
 
-    public static class Builder extends AbstractSearchRequest.Builder<Track12, SearchRequest.Builder>{
+    public static class Builder extends AbstractSearchRequest.Builder<Track12, SearchRequest.Builder> {
 
-        public Builder() {
-            super();
+        public Builder(String query) {
+            super(query);
             addSegmentToPath("search");
         }
 
         /**
          * Search albums
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchAlbumRequest.Builder album(){
+        public SearchAlbumRequest.Builder albums() {
             return new SearchAlbumRequest.Builder(this);
         }
 
         /**
          * Search artists
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchArtistRequest.Builder artist(){
+        public SearchArtistRequest.Builder artists() {
             return new SearchArtistRequest.Builder(this);
         }
 
         /**
          * Get user search history
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchHistoryRequest.Builder history(String access_token){
+        public SearchHistoryRequest.Builder history(String access_token) {
             return new SearchHistoryRequest.Builder(this, access_token);
         }
 
         /**
          * Search playlists
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchPlaylistRequest.Builder playlist(){
+        public SearchPlaylistRequest.Builder playlists() {
             return new SearchPlaylistRequest.Builder(this);
         }
 
         /**
          * Search podcasts
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchPodcastRequest.Builder podcast(){
+        public SearchPodcastRequest.Builder podcasts() {
             return new SearchPodcastRequest.Builder(this);
         }
 
         /**
          * Search radios
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchRadioRequest.Builder radio(){
+        public SearchRadioRequest.Builder radios() {
             return new SearchRadioRequest.Builder(this);
         }
 
         /**
          * Search tracks
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchTrackRequest.Builder track(){
+        public SearchTrackRequest.Builder tracks() {
             return new SearchTrackRequest.Builder(this);
         }
 
         /**
          * Search users
-         * @return
+         *
+         * @return The request builder up to that point
          */
-        public SearchUserRequest.Builder user(){
+        public SearchUserRequest.Builder users() {
             return new SearchUserRequest.Builder(this);
         }
 
@@ -97,9 +112,13 @@ public class SearchRequest extends AbstractSearchRequest<Track12> {
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public SearchRequest build() {
-            buildQuery();
             return new SearchRequest(this);
         }
     }

@@ -2,14 +2,15 @@ package com.wrapper.deezer.requests.authorization.server_side;
 
 
 import com.wrapper.deezer.enums.Permissions;
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.requests.authorization.AbstractAuthorizationRequest;
-import com.wrapper.deezer.requests.data.chart.ChartRequest;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
 import java.net.URI;
-import java.text.ParseException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class AuthorizationServerSideUriRequest extends AbstractAuthorizationRequest<URI> {
@@ -19,13 +20,19 @@ public final class AuthorizationServerSideUriRequest extends AbstractAuthorizati
         super(builder);
     }
 
-    public URI execute() throws IOException, DeezerException, ParseException {
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     */
+    @Override
+    public URI execute() {
         return getURI();
     }
 
     public static final class Builder extends AbstractAuthorizationRequest.Builder<URI, Builder> {
 
-        private Set<Permissions> permissionsList;
+        private final Set<Permissions> permissionsList;
 
         public Builder(final String app_id, final URI redirectUri) {
             super(app_id);
@@ -36,17 +43,26 @@ public final class AuthorizationServerSideUriRequest extends AbstractAuthorizati
             this.permissionsList.add(Permissions.BASIC_ACCESS);
         }
 
-        public Builder addPermisisons(Permissions ... permissions){
+        /**
+         * Add permissions to this authorization Request
+         *
+         * @param permissions a suite of {@link Permissions}
+         * @return this
+         */
+        public Builder addPermissions(Permissions... permissions) {
             permissionsList.addAll(Arrays.asList(permissions));
             return self();
         }
 
-        public AuthorizationServerSideUriRequest build(){
+        /**
+         * Builds the request
+         *
+         * @return the {@link AuthorizationServerSideUriRequest} request
+         */
+        public AuthorizationServerSideUriRequest build() {
             // permissions to a single string of permissions, comma separated
             String permissionsCommaSeparated = permissionsList.stream()
-                    .map((perm)->{
-                        return perm.getValue();
-                    })
+                    .map(Permissions::getValue)
                     .collect(Collectors.joining(","));
             // set permissions as a parameter
             setQueryParameter("perms", permissionsCommaSeparated);

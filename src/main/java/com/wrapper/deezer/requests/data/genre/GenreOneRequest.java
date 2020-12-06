@@ -1,16 +1,14 @@
 package com.wrapper.deezer.requests.data.genre;
 
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.data.genre.Genre;
-import com.wrapper.deezer.requests.AbstractRequest;
-import com.wrapper.deezer.requests.RequestBehavior;
 import com.wrapper.deezer.requests.data.AbstractDataRequest;
 import com.wrapper.deezer.requests.data.genre.methods.GenreArtistsRequest;
 import com.wrapper.deezer.requests.data.genre.methods.GenrePodcastsRequest;
 import com.wrapper.deezer.requests.data.genre.methods.GenreRadiosRequest;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class GenreOneRequest extends AbstractDataRequest<Genre> {
 
@@ -18,27 +16,47 @@ public class GenreOneRequest extends AbstractDataRequest<Genre> {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Genre execute() throws IOException, DeezerException, ParseException {
-        return get().as(Genre.class);
+    public Genre execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(Genre.class);
     }
 
-    public static class Builder extends AbstractDataRequest.Builder<Genre, GenreOneRequest.Builder>{
+    public static class Builder extends AbstractDataRequest.Builder<Genre, GenreOneRequest.Builder> {
 
         public Builder(GenresRequest.Builder builder, Long id) {
             super(builder);
             addSegmentToPath(Long.toString(id));
         }
 
-        public GenreArtistsRequest.Builder artists(){
+        /**
+         * Returns all artists for a genre
+         * @return The request builder up to that point
+         */
+        public GenreArtistsRequest.Builder artists() {
             return new GenreArtistsRequest.Builder(this);
         }
 
-        public GenrePodcastsRequest.Builder podcasts(){
+        /**
+         * Returns all podcasts for a genre
+         * @return The request builder up to that point
+         */
+        public GenrePodcastsRequest.Builder podcasts() {
             return new GenrePodcastsRequest.Builder(this);
         }
 
-        public GenreRadiosRequest.Builder radios(){
+        /**
+         * Returns all radios for a genre
+         * @return The request builder up to that point
+         */
+        public GenreRadiosRequest.Builder radios() {
             return new GenreRadiosRequest.Builder(this);
         }
 
@@ -47,6 +65,11 @@ public class GenreOneRequest extends AbstractDataRequest<Genre> {
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public GenreOneRequest build() {
             return new GenreOneRequest(this);

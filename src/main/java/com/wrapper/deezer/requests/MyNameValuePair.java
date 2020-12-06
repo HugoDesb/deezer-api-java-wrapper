@@ -10,8 +10,8 @@ import java.util.Objects;
  */
 public class MyNameValuePair implements NameValuePair, Serializable {
 
-    private String name;
-    private String value;
+    private final String name;
+    private final String value;
 
     public MyNameValuePair(String name, String value) {
         this.name = name;

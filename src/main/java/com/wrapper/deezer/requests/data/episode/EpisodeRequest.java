@@ -1,31 +1,45 @@
 package com.wrapper.deezer.requests.data.episode;
 
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.data.episode.Episode;
 import com.wrapper.deezer.requests.data.AbstractDataRequest;
 import com.wrapper.deezer.requests.data.episode.actions.EpisodeRequestAction;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class EpisodeRequest extends AbstractDataRequest<Episode> {
     public EpisodeRequest(Builder builder) {
         super(builder);
     }
 
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Episode execute() throws IOException, DeezerException, ParseException {
-        return get().as(Episode.class);
+    public Episode execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(Episode.class);
     }
 
-    public static class Builder extends AbstractDataRequest.Builder<Episode, EpisodeRequest.Builder>{
+    public static class Builder extends AbstractDataRequest.Builder<Episode, EpisodeRequest.Builder> {
         public Builder(Long id) {
             super();
             addSegmentToPath("episode");
             addSegmentToPath(Long.toString(id));
         }
 
-        public EpisodeRequestAction actions(String accessToken){
+        /**
+         * Access the possible actions
+         *
+         * @param accessToken a valid access token
+         * @return an actions gateway
+         */
+        public EpisodeRequestAction actions(String accessToken) {
             return new EpisodeRequestAction(this, accessToken);
         }
 
@@ -34,6 +48,11 @@ public class EpisodeRequest extends AbstractDataRequest<Episode> {
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public EpisodeRequest build() {
             return new EpisodeRequest(this);

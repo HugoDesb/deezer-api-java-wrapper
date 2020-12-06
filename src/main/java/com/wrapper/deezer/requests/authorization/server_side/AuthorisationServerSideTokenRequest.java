@@ -1,16 +1,13 @@
 package com.wrapper.deezer.requests.authorization.server_side;
 
 import com.wrapper.deezer.enums.Output;
-import com.wrapper.deezer.exceptions.DeezerException;
+import com.wrapper.deezer.exceptions.DeezerApiException;
 import com.wrapper.deezer.models.Credentials;
 import com.wrapper.deezer.requests.AbstractRequest;
 import com.wrapper.deezer.requests.authorization.AbstractAuthorizationRequest;
-import com.wrapper.deezer.requests.data.chart.ChartRequest;
+import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
-import java.text.ParseException;
-
-import static io.restassured.RestAssured.given;
 
 public class AuthorisationServerSideTokenRequest extends AbstractAuthorizationRequest<Credentials> {
 
@@ -18,22 +15,37 @@ public class AuthorisationServerSideTokenRequest extends AbstractAuthorizationRe
         super(builder);
     }
 
+
+    /**
+     * Synchronously executes the request
+     *
+     * @return the data
+     * @throws IOException        Exception related to the handling of the http protocol
+     * @throws DeezerApiException See <a href="https://developers.deezer.com/api/errors"></>
+     * @throws ParseException     if the data returned doesn't match the target object (There may be an error in the models then ?)
+     */
     @Override
-    public Credentials execute() throws IOException, DeezerException, ParseException {
-        return get().as(Credentials.class);
+    public Credentials execute() throws IOException, DeezerApiException, ParseException {
+        return matchTo(Credentials.class);
     }
 
-    public static final class Builder extends AbstractAuthorizationRequest.Builder<Credentials, AuthorisationServerSideTokenRequest.Builder>{
+    public static final class Builder extends AbstractAuthorizationRequest.Builder<Credentials, AuthorisationServerSideTokenRequest.Builder> {
 
         public Builder(String appId, String secretKey, String code) {
             super(appId);
             assert (secretKey != null && code != null);
             assert (!secretKey.isEmpty() && !code.isEmpty());
-            setQueryParameter("secret",secretKey);
+            setQueryParameter("secret", secretKey);
             setQueryParameter("code", code);
         }
 
-        public Builder setOutput(Output output){
+        /**
+         * Set the output format
+         *
+         * @param output the desired output format
+         * @return The request builder up to that point
+         */
+        public Builder setOutput(Output output) {
             setQueryParameter("output", output.getValue());
             return self();
         }
@@ -43,6 +55,11 @@ public class AuthorisationServerSideTokenRequest extends AbstractAuthorizationRe
             return this;
         }
 
+        /**
+         * Builds the request
+         *
+         * @return the request
+         */
         @Override
         public AuthorisationServerSideTokenRequest build() {
             return new AuthorisationServerSideTokenRequest(this);

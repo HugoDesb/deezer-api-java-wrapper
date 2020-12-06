@@ -3,8 +3,6 @@ package com.wrapper.deezer.requests.authorization;
 import com.wrapper.deezer.Values;
 import com.wrapper.deezer.requests.AbstractRequest;
 
-import java.net.URISyntaxException;
-
 //Set Host
 public abstract class AbstractAuthorizationRequest<T> extends AbstractRequest<T> {
 
@@ -12,7 +10,7 @@ public abstract class AbstractAuthorizationRequest<T> extends AbstractRequest<T>
         super(builder);
     }
 
-    public static abstract class Builder<T, BT extends Builder<T, ?>> extends AbstractRequest.Builder<T, BT>{
+    public static abstract class Builder<T, BT extends Builder<T, ?>> extends AbstractRequest.Builder<T, BT> {
 
         protected Builder(String appId) {
             super();
