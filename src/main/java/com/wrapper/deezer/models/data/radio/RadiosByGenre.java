@@ -1,15 +1,10 @@
 package com.wrapper.deezer.models.data.radio;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 public class RadiosByGenre {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("radios")
     private List<Radio2> radios;
 
     public Long getId() {

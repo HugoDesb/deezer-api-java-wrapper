@@ -1,8 +1,8 @@
 package com.wrapper.deezer.models.data.album;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.wrapper.deezer.DataContainer;
+
+import com.google.gson.annotations.SerializedName;
+import com.wrapper.deezer.models.DataContainer;
 import com.wrapper.deezer.enums.ExplicitContent;
 import com.wrapper.deezer.models.data.Contributor;
 import com.wrapper.deezer.models.data.artist.Artist5;
@@ -12,99 +12,48 @@ import com.wrapper.deezer.models.data.track.Track4;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Album {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("upc")
     private String upc;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("share")
     private URL share;
-    @JsonProperty("cover")
     private URL cover;
-    @JsonProperty("cover_small")
+    @SerializedName("cover_small")
     private URL coverSmall;
-    @JsonProperty("cover_medium")
+    @SerializedName("cover_medium")
     private URL coverMedium;
-    @JsonProperty("cover_big")
+    @SerializedName("cover_big")
     private URL coverBig;
-    @JsonProperty("cover_xl")
+    @SerializedName("cover_xl")
     private URL coverXl;
-    @JsonProperty("genre_id")
+    @SerializedName("genre_id")
     private int genreId;
-    @JsonProperty("genres")
     private DataContainer<Genre2> genres;
-    @JsonProperty("label")
     private String label;
-    @JsonProperty("nb_tracks")
+    @SerializedName("nb_tracks")
     private int nbTracks;
-    @JsonProperty("duration")
     private int duration;
-    @JsonProperty("fans")
     private int fans;
-    @JsonProperty("rating")
     private int rating;
-    @JsonProperty("release_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @SerializedName("release_date")
     private Date releaseDate;
-    @JsonProperty("record_type")
+    @SerializedName("record_type")
     private String recordType;
-    @JsonProperty("available")
     private boolean available;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("explicit_lyrics")
+    @SerializedName("explicit_lyrics")
     private boolean explicitLyrics;
-    @JsonProperty("explicit_content_lyrics")
+    @SerializedName("explicit_content_lyrics")
     private ExplicitContent explicitContentLyrics;
-    @JsonProperty("explicit_content_cover")
+    @SerializedName("explicit_content_cover")
     private ExplicitContent explicitContentCover;
-    @JsonProperty("contributors")
     private List<Contributor> contributors;
-    @JsonProperty("artist")
     private Artist5 artist;
-    @JsonProperty("type")
     private String type;
-    @JsonProperty("tracks")
     private DataContainer<Track4> tracks;
-
-    public Album() {
-    }
-
-    public Album(Long id, String title, String upc, URL link, URL share, URL cover, URL coverSmall, URL coverMedium, URL coverBig, URL coverXl, int genreId, DataContainer<Genre2> genres, String label, int nbTracks, int duration, int fans, int rating, Date releaseDate, String recordType, boolean available, URL tracklist, boolean explicitLyrics, ExplicitContent explicitContentLyrics, ExplicitContent explicitContentCover, List<Contributor> contributors, Artist5 artist, String type, DataContainer<Track4> tracks) {
-        this.id = id;
-        this.title = title;
-        this.upc = upc;
-        this.link = link;
-        this.share = share;
-        this.cover = cover;
-        this.coverSmall = coverSmall;
-        this.coverMedium = coverMedium;
-        this.coverBig = coverBig;
-        this.coverXl = coverXl;
-        this.genreId = genreId;
-        this.genres = genres;
-        this.label = label;
-        this.nbTracks = nbTracks;
-        this.duration = duration;
-        this.fans = fans;
-        this.rating = rating;
-        this.releaseDate = releaseDate;
-        this.recordType = recordType;
-        this.available = available;
-        this.tracklist = tracklist;
-        this.explicitLyrics = explicitLyrics;
-        this.explicitContentLyrics = explicitContentLyrics;
-        this.explicitContentCover = explicitContentCover;
-        this.contributors = contributors;
-        this.artist = artist;
-        this.type = type;
-        this.tracks = tracks;
-    }
 
     public Long getId() {
         return id;
@@ -332,35 +281,58 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Album{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", upc='" + upc + '\'' +
-                ", link=" + link +
-                ", share=" + share +
-                ", cover=" + cover +
-                ", coverSmall=" + coverSmall +
-                ", coverMedium=" + coverMedium +
-                ", coverBig=" + coverBig +
-                ", coverXl=" + coverXl +
-                ", genreId=" + genreId +
-                ", genres=" + genres +
-                ", label='" + label + '\'' +
-                ", nbTracks=" + nbTracks +
-                ", duration=" + duration +
-                ", fans=" + fans +
-                ", rating=" + rating +
-                ", releaseDate=" + releaseDate +
-                ", recordType='" + recordType + '\'' +
-                ", available=" + available +
-                ", tracklist=" + tracklist +
-                ", explicitLyrics=" + explicitLyrics +
-                ", explicitContentLyrics=" + explicitContentLyrics +
-                ", explicitContentCover=" + explicitContentCover +
-                ", contributors=" + contributors +
-                ", artist=" + artist +
-                ", type='" + type + '\'' +
-                ", tracks=" + tracks +
-                '}';
+        return "{"
+                + "                        \"id\":\"" + id + "\""
+                + ",                         \"title\":\"" + title + "\""
+                + ",                         \"upc\":\"" + upc + "\""
+                + ",                         \"link\":" + link
+                + ",                         \"share\":" + share
+                + ",                         \"cover\":" + cover
+                + ",                         \"coverSmall\":" + coverSmall
+                + ",                         \"coverMedium\":" + coverMedium
+                + ",                         \"coverBig\":" + coverBig
+                + ",                         \"coverXl\":" + coverXl
+                + ",                         \"genreId\":\"" + genreId + "\""
+                + ",                         \"genres\":" + genres
+                + ",                         \"label\":\"" + label + "\""
+                + ",                         \"nbTracks\":\"" + nbTracks + "\""
+                + ",                         \"duration\":\"" + duration + "\""
+                + ",                         \"fans\":\"" + fans + "\""
+                + ",                         \"rating\":\"" + rating + "\""
+                + ",                         \"releaseDate\":" + releaseDate
+                + ",                         \"recordType\":\"" + recordType + "\""
+                + ",                         \"available\":\"" + available + "\""
+                + ",                         \"tracklist\":" + tracklist
+                + ",                         \"explicitLyrics\":\"" + explicitLyrics + "\""
+                + ",                         \"explicitContentLyrics\":\"" + explicitContentLyrics + "\""
+                + ",                         \"explicitContentCover\":\"" + explicitContentCover + "\""
+                + ",                         \"contributors\":" + contributors
+                + ",                         \"artist\":" + artist
+                + ",                         \"type\":\"" + type + "\""
+                + ",                         \"tracks\":" + tracks
+                + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Album album = (Album) o;
+        return genreId == album.genreId &&
+                nbTracks == album.nbTracks &&
+                duration == album.duration &&
+                available == album.available &&
+                explicitLyrics == album.explicitLyrics &&
+                Objects.equals(id, album.id) &&
+                Objects.equals(title, album.title) &&
+                Objects.equals(upc, album.upc) &&
+                Objects.equals(label, album.label) &&
+                Objects.equals(recordType, album.recordType) &&
+                Objects.equals(type, album.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, upc, genreId, label, nbTracks, duration, fans, rating, recordType, available, explicitLyrics, type);
     }
 }

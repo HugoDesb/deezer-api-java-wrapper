@@ -1,30 +1,22 @@
 package com.wrapper.deezer.models.data.editorial;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wrapper.deezer.UnixDateDeserializer;
-import com.wrapper.deezer.models.data.comments.Author;
+import com.google.gson.annotations.SerializedName;
 
 import java.net.URL;
-import java.util.Date;
 
 public class Editorial {
 
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("picture")
     private URL picture;
-    @JsonProperty("picture_small")
+    @SerializedName("picture_small")
     private URL pictureSmall;
-    @JsonProperty("picture_medium")
+    @SerializedName("picture_medium")
     private URL pictureMedium;
-    @JsonProperty("picture_big")
+    @SerializedName("picture_big")
     private URL pictureBig;
-    @JsonProperty("picture_xl")
+    @SerializedName("picture_xl")
     private URL pictureXl;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

@@ -1,42 +1,33 @@
 package com.wrapper.deezer.models.data.artist;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.net.URL;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Artist2 {
 
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("share")
     private URL share;
-    @JsonProperty("picture")
     private URL picture;
-    @JsonProperty("picture_small")
+    @SerializedName("picture_small")
     private URL pictureSmall;
-    @JsonProperty("picture_medium")
+    @SerializedName("picture_medium")
     private URL pictureMedium;
-    @JsonProperty("picture_big")
+    @SerializedName("picture_big")
     private URL pictureBig;
-    @JsonProperty("picture_xl")
+    @SerializedName("picture_xl")
     private URL pictureXl;
-    @JsonProperty("nb_album")
+    @SerializedName("nb_album")
     private int nbAlbum;
-    @JsonProperty("nb_fans")
+    @SerializedName("nb_fans")
     private int nbFans;
-    @JsonProperty("radio")
     private boolean radio;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("role")
     private String role;
-    @JsonProperty("type")
     private String type;
 
 

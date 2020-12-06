@@ -1,63 +1,47 @@
 package com.wrapper.deezer.models.data.album;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.wrapper.deezer.DataContainer;
-import com.wrapper.deezer.enums.ExplicitContent;
-import com.wrapper.deezer.models.data.Contributor;
+import com.google.gson.annotations.SerializedName;
 import com.wrapper.deezer.models.data.artist.Artist10;
-import com.wrapper.deezer.models.data.artist.Artist5;
-import com.wrapper.deezer.models.data.genre.Genre2;
-import com.wrapper.deezer.models.data.track.Track4;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
 
 public class Album8 {
-    @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("title")
     private String title;
 
-    @JsonProperty("link")
     private URL link;
 
-    @JsonProperty("cover")
     private URL cover;
 
-    @JsonProperty("cover_small")
+    @SerializedName("cover_small")
     private URL coverSmall;
 
-    @JsonProperty("cover_medium")
+    @SerializedName("cover_medium")
     private URL coverMedium;
 
-    @JsonProperty("cover_big")
+    @SerializedName("cover_big")
     private URL coverBig;
 
-    @JsonProperty("cover_xl")
+    @SerializedName("cover_xl")
     private URL coverXl;
 
-    @JsonProperty("genre_id")
+    @SerializedName("genre_id")
     private int genreId;
 
-    @JsonProperty("nb_tracks")
+    @SerializedName("nb_tracks")
     private int nbTracks;
 
-    @JsonProperty("record_type")
+    @SerializedName("record_type")
     private String recordType;
 
-    @JsonProperty("tracklist")
     private URL tracklist;
 
-    @JsonProperty("explicit_lyrics")
+    @SerializedName("explicit_lyrics")
     private boolean explicitLyrics;
 
-    @JsonProperty("artist")
     private Artist10 artist;
 
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

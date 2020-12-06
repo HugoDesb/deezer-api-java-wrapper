@@ -1,41 +1,31 @@
 package com.wrapper.deezer.models.data.artist;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wrapper.deezer.UnixDateDeserializer;
+import com.google.gson.annotations.SerializedName;
 
 import java.net.URL;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Artist12 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("picture")
     private URL picture;
-    @JsonProperty("picture_small")
+    @SerializedName("picture_small")
     private URL pictureSmall;
-    @JsonProperty("picture_medium")
+    @SerializedName("picture_medium")
     private URL pictureMedium;
-    @JsonProperty("picture_big")
+    @SerializedName("picture_big")
     private URL pictureBig;
-    @JsonProperty("picture_xl")
+    @SerializedName("picture_xl")
     private URL pictureXl;
-    @JsonProperty("nb_album")
+    @SerializedName("nb_album")
     private int nbAlbum;
-    @JsonProperty("nb_fan")
+    @SerializedName("nb_fan")
     private int nbFan;
-    @JsonProperty("radio")
     private boolean radio;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("time_add")
-    @JsonDeserialize(using = UnixDateDeserializer.class)
-    private Date timeAdd;
-    @JsonProperty("type")
+    @SerializedName("time_add")
+    private Timestamp timeAdd;
     private String type;
 
     public Long getId() {
@@ -134,11 +124,11 @@ public class Artist12 {
         this.tracklist = tracklist;
     }
 
-    public Date getTimeAdd() {
+    public Timestamp getTimeAdd() {
         return timeAdd;
     }
 
-    public void setTimeAdd(Date timeAdd) {
+    public void setTimeAdd(Timestamp timeAdd) {
         this.timeAdd = timeAdd;
     }
 

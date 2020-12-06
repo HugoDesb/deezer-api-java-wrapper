@@ -1,7 +1,7 @@
 package com.wrapper.deezer.models.data.track;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 import com.wrapper.deezer.enums.ExplicitContent;
 import com.wrapper.deezer.models.data.Contributor;
 import com.wrapper.deezer.models.data.album.Album2;
@@ -11,59 +11,41 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Track2 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("readable")
     private boolean readable;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("title_short")
+    @SerializedName("title_short")
     private String titleShort;
-    @JsonProperty("title_version")
+    @SerializedName("title_version")
     private String titleVersion;
-    @JsonProperty("unseen")
     private boolean unseen;
-    @JsonProperty("isrc")
     private String isrc;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("share")
     private URL share;
-    @JsonProperty("duration")
     private int duration;
-    @JsonProperty("track_position")
+    @SerializedName("track_position")
     private int trackPosition;
-    @JsonProperty("disk_number")
+    @SerializedName("disk_number")
     private int diskNumber;
-    @JsonProperty("rank")
     private int rank;
-    @JsonProperty("release_date")
+    @SerializedName("release_date")
     private Date releaseDate;
-    @JsonProperty("explicit_lyrics")
+    @SerializedName("explicit_lyrics")
     private boolean explicitLyrics;
-    @JsonProperty("explicit_content_lyrics")
+    @SerializedName("explicit_content_lyrics")
     private ExplicitContent explicitContentLyrics;
-    @JsonProperty("explicit_content_cover")
+    @SerializedName("explicit_content_cover")
     private ExplicitContent explicitContentCover;
-    @JsonProperty("preview")
     private URL preview;
-    @JsonProperty("bpm")
     private float bpm;
-    @JsonProperty("gain")
     private float gain;
-    @JsonProperty("countries")
     private List<String> countries;
-    @JsonProperty("alternative")
     private Track2 alternative;
-    @JsonProperty("contributors")
     private List<Contributor> contributors;
-    @JsonProperty("artist")
     private Artist2 artist;
-    @JsonProperty("album")
     private Album2 album;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

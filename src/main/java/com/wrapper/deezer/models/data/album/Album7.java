@@ -1,35 +1,28 @@
 package com.wrapper.deezer.models.data.album;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 import com.wrapper.deezer.models.data.artist.Artist3;
 
 import java.net.URL;
 import java.util.Date;
 
 public class Album7 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("cover")
     private URL cover;
-    @JsonProperty("cover_small")
+    @SerializedName("cover_small")
     private URL coverSmall;
-    @JsonProperty("cover_medium")
+    @SerializedName("cover_medium")
     private URL coverMedium;
-    @JsonProperty("cover_big")
+    @SerializedName("cover_big")
     private URL coverBig;
-    @JsonProperty("cover_xl")
+    @SerializedName("cover_xl")
     private URL coverXl;
-    @JsonProperty("release_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @SerializedName("release_date")
     private Date releaseDate;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("artist")
     private Artist3 artist;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

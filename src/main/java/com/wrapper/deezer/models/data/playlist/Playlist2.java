@@ -1,41 +1,31 @@
 package com.wrapper.deezer.models.data.playlist;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 import com.wrapper.deezer.models.data.user.User3;
 
 import java.net.URL;
 import java.util.Date;
 
 public class Playlist2 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("public")
     private boolean _public;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("picture")
     private URL picture;
-    @JsonProperty("picture_small")
+    @SerializedName("picture_small")
     private URL pictureSmall;
-    @JsonProperty("picture_medium")
+    @SerializedName("picture_medium")
     private URL pictureMedium;
-    @JsonProperty("picture_big")
+    @SerializedName("picture_big")
     private URL pictureBig;
-    @JsonProperty("picture_xl")
+    @SerializedName("picture_xl")
     private URL pictureXl;
-    @JsonProperty("checksum")
     private String checksum;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("creation_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @SerializedName("creation_date")
     private Date creationDate;
-    @JsonProperty("user")
     private User3 user;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

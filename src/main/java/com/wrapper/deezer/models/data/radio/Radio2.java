@@ -1,27 +1,24 @@
 package com.wrapper.deezer.models.data.radio;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.net.URL;
 
 public class Radio2 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("picture")
     private URL picture;
-    @JsonProperty("picture_small")
+    @SerializedName("picture_small")
     private URL pictureSmall;
-    @JsonProperty("picture_medium")
+    @SerializedName("picture_medium")
     private URL pictureMedium;
-    @JsonProperty("picture_big")
+    @SerializedName("picture_big")
     private URL pictureBig;
-    @JsonProperty("picture_xl")
+    @SerializedName("picture_xl")
     private URL pictureXl;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("type")
+    @SerializedName("md5_image")
+    private String md5Image;
     private String type;
 
     public Long getId() {
@@ -94,6 +91,14 @@ public class Radio2 {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getMd5Image() {
+        return md5Image;
+    }
+
+    public void setMd5Image(String md5Image) {
+        this.md5Image = md5Image;
     }
 
     @Override

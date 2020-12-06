@@ -1,17 +1,11 @@
 package com.wrapper.deezer.models.data.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.net.URL;
 
 public class User3 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

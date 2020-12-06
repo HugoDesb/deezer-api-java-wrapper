@@ -1,56 +1,41 @@
 package com.wrapper.deezer.models.data.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
 public class User {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("lastname")
     private String lastname;
-    @JsonProperty("firstname")
     private String firstname;
-    @JsonProperty("email")
     private String email;
-    @JsonProperty("status")
     private int status;
-    @JsonProperty("birthday")
     private Date birthday;
-    @JsonProperty("inscription_date")
+    @SerializedName("inscription_date")
     private Date inscriptionDate;
-    @JsonProperty("gender")
     private String gender;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("picture")
     private URL picture;
-    @JsonProperty("picture_small")
+    @SerializedName("picture_small")
     private URL pictureSmall;
-    @JsonProperty("picture_medium")
+    @SerializedName("picture_medium")
     private URL pictureMedium;
-    @JsonProperty("picture_big")
+    @SerializedName("picture_big")
     private URL pictureBig;
-    @JsonProperty("picture_xl")
+    @SerializedName("picture_xl")
     private URL pictureXl;
-    @JsonProperty("country")
     private String country;
-    @JsonProperty("lang")
     private String language;
-    @JsonProperty("is_kid")
+    @SerializedName("is_kid")
     private Boolean isKid;
-    @JsonProperty("explicit_content_level")
+    @SerializedName("explicit_content_level")
     private String explicitContentLevel;
-    @JsonProperty("explicit_content_levels_available")
+    @SerializedName("explicit_content_levels_available")
     private List<String> explicitContentLevelsAvailable;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

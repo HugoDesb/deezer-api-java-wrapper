@@ -1,6 +1,5 @@
 package com.wrapper.deezer.models.data.chart;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wrapper.deezer.models.Page;
 import com.wrapper.deezer.models.data.album.Album5;
 import com.wrapper.deezer.models.data.artist.Artist7;
@@ -10,19 +9,14 @@ import com.wrapper.deezer.models.data.track.Track5;
 
 public class Chart {
 
-    @JsonProperty("tracks")
     private Page<Track5> tracks;
 
-    @JsonProperty("albums")
     private Page<Album5> albums;
 
-    @JsonProperty("artists")
     private Page<Artist7> artists;
 
-    @JsonProperty("playlists")
     private Page<Playlist3> playlists;
 
-    @JsonProperty("podcasts")
     private Page<Podcast2> podcasts;
 
     public Page<Track5> getTracks() {

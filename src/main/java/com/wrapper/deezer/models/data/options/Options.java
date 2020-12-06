@@ -1,34 +1,26 @@
 package com.wrapper.deezer.models.data.options;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 public class Options {
-    @JsonProperty("streaming")
     private boolean streaming;
-    @JsonProperty("streaming_duration")
+    @SerializedName("streaming_duration")
     private int streamingDuration;
-    @JsonProperty("offline")
     private boolean offline;
-    @JsonProperty("hq")
     private boolean hq;
-    @JsonProperty("ads_display")
+    @SerializedName("ads_display")
     private boolean adsDisplay;
-    @JsonProperty("ads_audio")
+    @SerializedName("ads_audio")
     private boolean adsAudio;
-    @JsonProperty("too_many_devices")
+    @SerializedName("too_many_devices")
     private boolean tooManyDevices;
-    @JsonProperty("can_suscribe")
-    private boolean canSuscribe;
-    @JsonProperty("radio_skips")
+    @SerializedName("can_subscribe")
+    private boolean canSubscribe;
+    @SerializedName("radio_skips")
     private int radioSkips;
-    @JsonProperty("lossless")
     private boolean lossless;
-    @JsonProperty("preview")
     private boolean preview;
-    @JsonProperty("radio")
     private boolean radio;
-    @JsonProperty("type")
     private String type;
 
     public boolean isStreaming() {
@@ -87,12 +79,12 @@ public class Options {
         this.tooManyDevices = tooManyDevices;
     }
 
-    public boolean isCanSuscribe() {
-        return canSuscribe;
+    public boolean isCanSubscribe() {
+        return canSubscribe;
     }
 
-    public void setCanSuscribe(boolean canSuscribe) {
-        this.canSuscribe = canSuscribe;
+    public void setCanSubscribe(boolean canSubscribe) {
+        this.canSubscribe = canSubscribe;
     }
 
     public int getRadioSkips() {
@@ -145,7 +137,7 @@ public class Options {
                 ", adsDisplay=" + adsDisplay +
                 ", adsAudio=" + adsAudio +
                 ", tooManyDevices=" + tooManyDevices +
-                ", canSuscribe=" + canSuscribe +
+                ", canSubscribe=" + canSubscribe +
                 ", radioSkips=" + radioSkips +
                 ", lossless=" + lossless +
                 ", preview=" + preview +

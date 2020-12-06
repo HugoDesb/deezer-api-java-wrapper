@@ -1,24 +1,21 @@
 package com.wrapper.deezer.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringJoiner;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Page<T> {
 
-    @JsonProperty("data")
     private List<T> data;
 
-    @JsonProperty("total")
     private int total;
 
-    @JsonProperty("next")
     private URL next;
 
-    @JsonProperty("prev")
     private URL previous;
 
     public List<T> getData() {
@@ -51,5 +48,37 @@ public class Page<T> {
 
     public void setPrevious(URL previous) {
         this.previous = previous;
+    }
+
+    public boolean hasNext() {
+        return next != null && !next.toString().isEmpty();
+    }
+
+    public boolean hasPrevious() {
+        return previous != null && !previous.toString().isEmpty();
+    }
+
+    public int next() {
+        String[] params = next.getQuery().split("&");
+        Map<String, String> map = new HashMap<>();
+
+        for (String param : params) {
+            String name = param.split("=")[0];
+            String value = param.split("=")[1];
+            map.put(name, value);
+        }
+
+        return Integer.parseInt(map.get("index"));
+    }
+
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Page.class.getSimpleName() + "[", "]")
+                .add("data=" + data)
+                .add("total=" + total)
+                .add("next=" + next)
+                .add("previous=" + previous)
+                .toString();
     }
 }

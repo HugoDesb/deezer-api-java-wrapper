@@ -1,41 +1,29 @@
 package com.wrapper.deezer.models.data.track;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import com.wrapper.deezer.enums.ExplicitContent;
-import com.wrapper.deezer.models.data.Contributor;
-import com.wrapper.deezer.models.data.album.Album2;
 import com.wrapper.deezer.models.data.album.Album3;
-import com.wrapper.deezer.models.data.artist.Artist11;
 import com.wrapper.deezer.models.data.artist.Artist5;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
 
 public class Track13 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("readable")
     private boolean readable;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("duration")
     private int duration;
-    @JsonProperty("rank")
     private int rank;
-    @JsonProperty("explicit_lyrics")
+    @SerializedName("explicit_lyrics")
     private boolean explicitLyrics;
-    @JsonProperty("explicit_content_lyrics")
+    @SerializedName("explicit_content_lyrics")
     private ExplicitContent explicitContentLyrics;
-    @JsonProperty("explicit_content_cover")
+    @SerializedName("explicit_content_cover")
     private ExplicitContent explicitContentCover;
-    @JsonProperty("preview")
     private URL preview;
-    @JsonProperty("artist")
+    @SerializedName("md5_image")
+    private String md5Image;
     private Artist5 artist;
-    @JsonProperty("album")
     private Album3 album;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

@@ -1,18 +1,12 @@
 package com.wrapper.deezer.models.data.genre;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.net.URL;
 
 public class Genre2 {
 
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("picture")
     private URL picture;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

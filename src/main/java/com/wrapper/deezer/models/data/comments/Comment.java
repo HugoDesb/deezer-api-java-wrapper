@@ -1,26 +1,17 @@
 package com.wrapper.deezer.models.data.comments;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wrapper.deezer.UnixDateDeserializer;
 import com.wrapper.deezer.models.data.TypeObject;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Comment {
 
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("text")
     private String text;
-    @JsonProperty("date")
-    @JsonDeserialize(using = UnixDateDeserializer.class)
-    private Date date;
-    @JsonProperty("object")
+
+    private Timestamp date;
     private TypeObject object;
-    @JsonProperty("author")
     private Author author;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {
@@ -39,11 +30,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

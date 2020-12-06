@@ -1,19 +1,12 @@
 package com.wrapper.deezer.models.data.artist;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.net.URL;
 
 public class Artist8 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("tracklist")
     private URL tracklist;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {

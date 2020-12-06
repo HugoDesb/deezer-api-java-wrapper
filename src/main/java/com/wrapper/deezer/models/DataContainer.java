@@ -1,12 +1,10 @@
-package com.wrapper.deezer;
+package com.wrapper.deezer.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class DataContainer<T> {
 
-    @JsonProperty("data")
     private List<T> data;
 
     public List<T> getData() {

@@ -1,13 +1,9 @@
 package com.wrapper.deezer.models.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class TypeObject {
 
-    @JsonProperty("id")
     private String id;
 
-    @JsonProperty("type")
     private String type;
 
     public String getId() {

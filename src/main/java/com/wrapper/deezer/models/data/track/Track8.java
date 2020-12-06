@@ -1,52 +1,35 @@
 package com.wrapper.deezer.models.data.track;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wrapper.deezer.UnixDateDeserializer;
+import com.google.gson.annotations.SerializedName;
 import com.wrapper.deezer.enums.ExplicitContent;
-import com.wrapper.deezer.models.data.Contributor;
-import com.wrapper.deezer.models.data.album.Album2;
 import com.wrapper.deezer.models.data.album.Album3;
-import com.wrapper.deezer.models.data.artist.Artist2;
 import com.wrapper.deezer.models.data.artist.Artist8;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
 
 public class Track8 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("readable")
     private boolean readable;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("title_short")
+    @SerializedName("title_short")
     private String titleShort;
-    @JsonProperty("title_version")
+    @SerializedName("title_version")
     private String titleVersion;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("duration")
     private int duration;
-    @JsonProperty("rank")
     private int rank;
-    @JsonProperty("explicit_lyrics")
+    @SerializedName("explicit_lyrics")
     private boolean explicitLyrics;
-    @JsonProperty("explicit_content_lyrics")
+    @SerializedName("explicit_content_lyrics")
     private ExplicitContent explicitContentLyrics;
-    @JsonProperty("explicit_content_cover")
+    @SerializedName("explicit_content_cover")
     private ExplicitContent explicitContentCover;
-    @JsonProperty("preview")
     private URL preview;
-    @JsonProperty("time_add")
-    @JsonDeserialize(using = UnixDateDeserializer.class)
-    private Date timeAdd;
-    @JsonProperty("artist")
+    @SerializedName("time_add")
+    private Timestamp timeAdd;
     private Artist8 artist;
-    @JsonProperty("album")
     private Album3 album;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {
@@ -145,11 +128,11 @@ public class Track8 {
         this.preview = preview;
     }
 
-    public Date getTimeAdd() {
+    public Timestamp getTimeAdd() {
         return timeAdd;
     }
 
-    public void setTimeAdd(Date timeAdd) {
+    public void setTimeAdd(Timestamp timeAdd) {
         this.timeAdd = timeAdd;
     }
 

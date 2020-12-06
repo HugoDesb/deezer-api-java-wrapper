@@ -1,27 +1,22 @@
 package com.wrapper.deezer.models.data.infos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.net.URL;
 
 public class Offer {
-    @JsonProperty("id")
     private int id;
-    @JsonProperty("name")
     private String name;
-    @JsonProperty("amount")
     private String amount;
-    @JsonProperty("currency")
     private String currency;
-    @JsonProperty("displayed_amount")
+    @SerializedName("displayed_amount")
     private String displayedAmount;
-    @JsonProperty("tc")
     private URL tc;
-    @JsonProperty("tc_html")
+    @SerializedName("tc_html")
     private URL tcHTML;
-    @JsonProperty("tc_txt")
+    @SerializedName("tc_txt")
     private URL tcTXT;
-    @JsonProperty("try_and_buy")
+    @SerializedName("try_and_buy")
     private int tryAndBuy;
 
     public int getId() {

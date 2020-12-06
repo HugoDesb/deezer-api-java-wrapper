@@ -1,19 +1,16 @@
 package com.wrapper.deezer.models.data.infos;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Infos {
-    @JsonProperty("country_iso")
+    @SerializedName("country_iso")
     private String countryISO;
-    @JsonProperty("country")
     private String country;
-    @JsonProperty("open")
     private boolean open;
-    @JsonProperty("offers")
     private List<Offer> offers;
 
     public String getCountryISO() {

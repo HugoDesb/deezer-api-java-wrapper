@@ -1,7 +1,5 @@
 package com.wrapper.deezer.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 public class Credentials {
 
     private final String accessToken;

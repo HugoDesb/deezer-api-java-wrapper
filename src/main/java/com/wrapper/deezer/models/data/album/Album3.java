@@ -1,28 +1,26 @@
 package com.wrapper.deezer.models.data.album;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.net.URL;
-import java.time.LocalDateTime;
+
 
 public class Album3 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("cover")
     private URL cover;
-    @JsonProperty("cover_small")
+    @SerializedName("cover_small")
     private URL coverSmall;
-    @JsonProperty("cover_medium")
+    @SerializedName("cover_medium")
     private URL coverMedium;
-    @JsonProperty("cover_big")
+    @SerializedName("cover_big")
     private URL coverBig;
-    @JsonProperty("cover_xl")
+    @SerializedName("cover_xl")
     private URL coverXl;
-    @JsonProperty("tracklist")
+    @SerializedName("md5_image")
+    private String md5Image;
     private URL tracklist;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {
@@ -95,6 +93,14 @@ public class Album3 {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getMd5Image() {
+        return md5Image;
+    }
+
+    public void setMd5Image(String md5Image) {
+        this.md5Image = md5Image;
     }
 
     @Override

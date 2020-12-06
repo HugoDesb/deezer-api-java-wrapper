@@ -1,47 +1,31 @@
 package com.wrapper.deezer.models.data.track;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.wrapper.deezer.UnixDateDeserializer;
-import com.wrapper.deezer.enums.ExplicitContent;
+import com.google.gson.annotations.SerializedName;
 import com.wrapper.deezer.models.data.album.Album3;
 import com.wrapper.deezer.models.data.artist.Artist10;
-import com.wrapper.deezer.models.data.artist.Artist6;
 
 import java.net.URL;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Track10 {
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("readable")
     private boolean readable;
-    @JsonProperty("title")
     private String title;
-    @JsonProperty("title_short")
+    @SerializedName("title_short")
     private String titleShort;
-    @JsonProperty("title_version")
+    @SerializedName("title_version")
     private String titleVersion;
-    @JsonProperty("unseen")
     private boolean unseen;
-    @JsonProperty("link")
     private URL link;
-    @JsonProperty("duration")
     private int duration;
-    @JsonProperty("rank")
     private int rank;
-    @JsonProperty("explicit_lyrics")
+    @SerializedName("explicit_lyrics")
     private boolean explicitLyrics;
-    @JsonProperty("preview")
     private URL preview;
-    @JsonProperty("time_add")
-    @JsonDeserialize(using = UnixDateDeserializer.class)
-    private Date timeAdd;
-    @JsonProperty("artist")
+    @SerializedName("time_add")
+    private Timestamp timeAdd;
     private Artist10 artist;
-    @JsonProperty("album")
     private Album3 album;
-    @JsonProperty("type")
     private String type;
 
     public Long getId() {
@@ -132,11 +116,11 @@ public class Track10 {
         this.preview = preview;
     }
 
-    public Date getTimeAdd() {
+    public Timestamp getTimeAdd() {
         return timeAdd;
     }
 
-    public void setTimeAdd(Date timeAdd) {
+    public void setTimeAdd(Timestamp timeAdd) {
         this.timeAdd = timeAdd;
     }
 
