@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.hugodesb</groupId>
     <artifactId>deezer-api-java-wrapper</artifactId>
-    <version>0.2</version>
+    <version>0.2.0</version>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <!--
+   DO NOT FORGET
+   - to update version numbers in README (2x)
+   - to update the Javadoc by deleting the docs folder and recreating it
+  -->
+
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+
+
+
+    <name>Java wrapper for Deezer Api</name>
     <description>A wrapper designed for easy usage of the Deezer API</description>
     <url>https://github.com/HugoDesb/deezer-api-java-wrapper</url>
 
+    <developers>
+        <developer>
+            <name>Hugo Desbiolles</name>
+            <email>hugo.desbiolles@gmail.com</email>
+            <organization>Hugo Desbiolles</organization>
+            <organizationUrl>hugodesb.github.io</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/Paris</timezone>
+        </developer>
+    </developers>
 
     <licenses>
         <license>
@@ -20,16 +51,10 @@
         </license>
     </licenses>
 
-    <developers>
-        <developer>
-            <name>Hugo Desbiolles</name>
-        </developer>
-    </developers>
-
     <scm>
+        <url>https://github.com/hugodesb/deezer-api-java-wrapper</url>
         <connection>scm:git:git://github.com/hugodesb/deezer-api-java-wrapper.git</connection>
-        <developerConnection>scm:git:ssh://github.com:hugodesb/deezer-api-java-wrapper.git</developerConnection>
-        <url>http://github.com/hugodesb/deezer-api-java-wrapper/tree/master</url>
+        <developerConnection>scm:git:git@github.com:hugodesb/deezer-api-java-wrapper.git</developerConnection>
     </scm>
 
     <build>
@@ -39,17 +64,22 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.2.0</version>
                     <configuration>
-                        <source>8</source>
-                        <target>8</target>
+                        <show>private</show>
+                        <outputDirectory>docs/</outputDirectory>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
 
     </build>
-    <dependencies>
 
+    <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5 -->
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
@@ -65,13 +95,16 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
         </dependency>
 
+
     </dependencies>
 
+    <packaging>jar</packaging>
 
 </project>
